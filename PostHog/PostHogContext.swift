@@ -173,28 +173,28 @@ class PostHogContext {
     func dynamicContext() -> [String: Any] {
         var properties: [String: Any] = [:]
 
-        if let screenSize {
-            properties["$screen_width"] = Float(screenSize.width)
-            properties["$screen_height"] = Float(screenSize.height)
-        }
+//        if let screenSize {
+//            properties["$screen_width"] = Float(screenSize.width)
+//            properties["$screen_height"] = Float(screenSize.height)
+//        }
 
-        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-            if let languageCode = Locale.current.language.languageCode {
-                properties["$locale"] = languageCode.identifier
-            }
-        } else {
-            if Locale.current.languageCode != nil {
-                properties["$locale"] = Locale.current.languageCode
-            }
-        }
+//        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+//            if let languageCode = Locale.current.language.languageCode {
+//                properties["$locale"] = languageCode.identifier
+//            }
+//        } else {
+//            if Locale.current.languageCode != nil {
+//                properties["$locale"] = Locale.current.languageCode
+//            }
+//        }
         properties["$timezone"] = TimeZone.current.identifier
 
-        #if !os(watchOS)
-            if reachability != nil {
-                properties["$network_wifi"] = reachability?.connection == .wifi
-                properties["$network_cellular"] = reachability?.connection == .cellular
-            }
-        #endif
+//        #if !os(watchOS)
+//            if reachability != nil {
+//                properties["$network_wifi"] = reachability?.connection == .wifi
+//                properties["$network_cellular"] = reachability?.connection == .cellular
+//            }
+//        #endif
 
         return properties
     }
@@ -228,9 +228,9 @@ class PostHogContext {
         if let deviceManufacturer = staticCtx["$device_manufacturer"] {
             personProperties["$device_manufacturer"] = deviceManufacturer
         }
-        if let deviceModel = staticCtx["$device_model"] {
-            personProperties["$device_model"] = deviceModel
-        }
+//        if let deviceModel = staticCtx["$device_model"] {
+//            personProperties["$device_model"] = deviceModel
+//        }
 
         // Localization - read directly to avoid expensive dynamicContext call
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
